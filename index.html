@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transformer Digital Twin | EMS Analysis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M7 2V5M17 2V5M3 10H21M5 5H19C20.1046 5 21 5.89543 21 7V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V7C3 5.89543 3.89543 5 5 5ZM7 10V16M12 10V16M17 10V16"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+                <h1>Transformer <span>Digital Twin</span></h1>
+            </div>
+            <p class="subtitle">Interactive Real-time Electrical Parameter Simulation</p>
+        </header>
+
+        <main class="dashboard">
+            <!-- Input Panel -->
+            <section class="panel editor">
+                <div class="section-header">
+                    <h2>Input Parameters</h2>
+                    <button id="reset-btn" class="btn-text">Reset</button>
+                </div>
+
+                <div class="input-grid">
+                    <div class="input-group">
+                        <label for="vp">Primary Voltage (Vₚ)</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="vp" placeholder="240" step="any" min="0">
+                            <span class="unit">V</span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="vs">Secondary Voltage (Vₛ)</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="vs" placeholder="120" step="any" min="0">
+                            <span class="unit">V</span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="ip">Primary Current (Iₚ)</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="ip" placeholder="5" step="any" min="0">
+                            <span class="unit">A</span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="is">Secondary Current (Iₛ)</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="is" placeholder="10" step="any" min="0">
+                            <span class="unit">A</span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="np">Primary Turns (Nₚ)</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="np" placeholder="1000" step="any" min="1">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="ns">Secondary Turns (Nₛ)</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="ns" placeholder="500" step="any" min="1">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="zl">Load Impedance (Zₗ)</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="zl" placeholder="Load" step="any" min="0">
+                            <span class="unit">Ω</span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="phi">Phase Angle (ϕ)</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="phi" placeholder="0" step="any">
+                            <span class="unit">°</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="advanced-toggle">
+                    <label class="switch">
+                        <input type="checkbox" id="practical-model-toggle">
+                        <span class="slider round"></span>
+                    </label>
+                    <span>Use Practical Model (Losses)</span>
+                </div>
+
+                <div id="practical-inputs" class="input-grid hidden">
+                    <div class="input-group">
+                        <label for="rw">Winding Resistance</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="rw" placeholder="0.5" step="any" min="0">
+                            <span class="unit">Ω</span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="xm">Magnetizing Reactance</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="xm" placeholder="500" step="any" min="0">
+                            <span class="unit">Ω</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Panel -->
+            <section class="panel results">
+                <div class="section-header">
+                    <h2>Computed Metrics</h2>
+                    <span id="model-badge" class="badge ideal">Ideal Model</span>
+                </div>
+
+                <div class="metrics-grid" id="metrics-output">
+                    <!-- Dynamic metrics injected here -->
+                    <div class="metric-card">
+                        <label>Transformation Ratio (a)</label>
+                        <div class="value" id="res-ratio">--</div>
+                    </div>
+                    <div class="metric-card neon">
+                        <label>Output Power (Pₛ)</label>
+                        <div class="value" id="res-power">--</div>
+                        <span class="unit">W</span>
+                    </div>
+                    <div class="metric-card">
+                        <label>Efficiency (η)</label>
+                        <div class="value" id="res-efficiency">--</div>
+                        <span class="unit">%</span>
+                    </div>
+                    <div class="metric-card">
+                        <label>Reflected Impedance (Zₚ')</label>
+                        <div class="value" id="res-reflected">--</div>
+                        <span class="unit">Ω</span>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="balanceChart"></canvas>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-info">
+                <p>&copy; 2026 Transformer Digital Twin. Developed by <strong>Arhum Naeem</strong></p>
+                <div class="contact-links">
+                    <a href="mailto:engr.arhumnaeem@gmail.com" class="footer-link">engr.arhumnaeem@gmail.com</a>
+                    <span class="separator">|</span>
+                    <a href="https://arhumnaeem.netlify.app" target="_blank" class="footer-link">Portfolio</a>
+                </div>
+            </div>
+            <div id="status-bar" class="status-bar">
+                <span class="status-dot"></span>
+                <span id="status-text">Ready</span>
+            </div>
+        </footer>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>

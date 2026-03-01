@@ -1,0 +1,33 @@
+# Transformer Formula Reference
+
+## 1. Voltage and Turns Ratio
+Vₚ / Vₛ = Nₚ / Nₛ = a
+Where:
+- Vₚ = Primary Voltage
+- Vₛ = Secondary Voltage
+- Nₚ = Primary Turns
+- Nₛ = Secondary Turns
+- a = Transformation Ratio
+
+## 2. Current Relationship (Ideal)
+Iₚ / Iₛ = Nₛ / Nₚ = 1 / a
+Ip * Vp = Is * Vs (Apparent Power Balance)
+
+## 3. Impedance Transformation
+Zₚ = Zₛ * (Nₚ / Nₛ)² = Zₛ * a²
+Zₛ = Vₛ / Iₛ (Load Impedance)
+
+## 4. Power Calculations
+- Apparent Power (S): S = V * I (VA)
+- Real Power (P): P = V * I * cos(ϕ) (Watts)
+- Reactive Power (Q): Q = V * I * sin(ϕ) (VAR)
+
+## 5. Practical Model (Losses)
+- Efficiency (η): η = (Pₒᵤₜ / Pᵢₙ) * 100%
+- Pᵢₙ = Pₒᵤₜ + Pₗₒₛₛ
+- Pₗₒₛₛ = Copper Loss (I²R) + Core Loss (Iron Loss)
+- Voltage Regulation (VR): VR = ((Vₙₒ₋ₗₒₐₑ - V_full_load) / V_full_load) * 100%
+
+## 6. Magnetizing Current
+Iₘ = Vₚ / Xₘ
+Where Xₘ is the magnetizing reactance.
