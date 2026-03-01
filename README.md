@@ -23,4 +23,5 @@ This is a work-in-progress OpenSource project. We highly value community feedbac
 - **Portfolio**: [arhumnaeem.netlify.app](https://arhumnaeem.netlify.app)
 
 ---
-*Created for the 6th Semester EMS Course.*
+*Created for the EMS Course.*
+
