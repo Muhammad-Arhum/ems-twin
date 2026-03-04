@@ -24,6 +24,15 @@
                 <h1>Transformer <span>Digital Twin</span></h1>
             </div>
             <p class="subtitle">Interactive Real-time Electrical Parameter Simulation</p>
+
+            <div class="mode-switcher">
+                <span class="mode-label">Calculator</span>
+                <label class="switch mode-toggle">
+                    <input type="checkbox" id="realtime-toggle">
+                    <span class="slider round"></span>
+                </label>
+                <span class="mode-label realtime">Realtime</span>
+            </div>
         </header>
 
         <main class="dashboard">
@@ -91,12 +100,14 @@
                     </div>
                 </div>
 
-                <div class="advanced-toggle">
-                    <label class="switch">
-                        <input type="checkbox" id="practical-model-toggle">
-                        <span class="slider round"></span>
-                    </label>
-                    <span>Use Practical Model (Losses)</span>
+                <div class="advanced-toggles">
+                    <div class="advanced-toggle">
+                        <label class="switch">
+                            <input type="checkbox" id="practical-model-toggle">
+                            <span class="slider round"></span>
+                        </label>
+                        <span>Use Practical Model (Losses)</span>
+                    </div>
                 </div>
 
                 <div id="practical-inputs" class="input-grid hidden">
@@ -168,6 +179,53 @@
             </div>
         </footer>
     </div>
+    <!-- Firebase Credential Modal -->
+    <div id="credential-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Firebase Configuration</h2>
+                <button id="close-modal" class="btn-icon">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="security-notice">
+                    <div class="notice-header">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12 9V11M12 15H12.01M5.07183 19H18.9282C20.4678 19 21.4301 17.3333 20.6603 16L13.7321 4C12.9623 2.66667 11.0378 2.66667 10.268 4L3.33978 16C2.56998 17.3333 3.53223 19 5.07183 19Z"
+                                stroke="#ffaa00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <strong>IMPORTANT SECURITY NOTICE</strong>
+                    </div>
+                    <p>The credentials entered here are <strong>NOT stored</strong> on any server. They are used only
+                        within your current browser session. However, these credentials may be visible in the browser’s
+                        developer tools. Ensure your Firebase Realtime Database follows the schema defined in the
+                        project README before connecting.</p>
+                </div>
+
+                <div class="input-group">
+                    <label for="fb-api-key">Firebase API Key</label>
+                    <input type="password" id="fb-api-key" placeholder="AIzaSy...">
+                </div>
+                <div class="input-group">
+                    <label for="fb-project-id">Project ID</label>
+                    <input type="text" id="fb-project-id" placeholder="my-project-id">
+                </div>
+                <div class="input-group">
+                    <label for="fb-db-url">Realtime Database URL</label>
+                    <input type="text" id="fb-db-url" placeholder="https://xxx-default-rtdb.firebaseio.com">
+                </div>
+                <div class="input-group">
+                    <label for="fb-db-path">Database Path</label>
+                    <input type="text" id="fb-db-path" placeholder="/transformer/live" value="/">
+                </div>
+
+                <button id="connect-fb-btn" class="btn-primary">Connect & Sync</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container" class="toast-container"></div>
+
     <script src="app.js"></script>
 </body>
 

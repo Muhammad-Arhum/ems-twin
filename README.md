@@ -45,11 +45,6 @@ To enable real-time hardware integration, you can use the following components:
 
 > ⚠️ Use voltage dividers or isolation modules as needed. Always ensure safety when working with AC voltages.
 
-### ⚒️ Example Wiring Diagram
-
-> Coming soon: SVG wiring diagram (community contributions welcome!)
-
----
 
 ## 🌐 Firebase Configuration (Realtime Mode)
 
@@ -144,5 +139,4 @@ This is a work-in-progress OpenSource project. We highly value community feedbac
 *Created for the 6th Semester EMS Course.*
 *Proudly built as an open-source tool for electrical labs and learning.*
 
-```
 
